@@ -1,29 +1,38 @@
 package packages.domain;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@ResponseStatus (HttpStatus.BAD_REQUEST)
 public class Pessoa {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false, length = 250)
     private String nome;
 
+    @Column(nullable = false, length = 11)
+    private String cpf;
+
+    @Column(name = "data_nascimento", nullable = false)
     private LocalDate dataNascimento;
 
+    @CreationTimestamp
+    @Column(name = "data_insercao", nullable = false)
     private LocalDateTime dataInsercao;
+
+    @UpdateTimestamp
+    @Column(name = "data_atualizacao", nullable = false)
+    private LocalDateTime dataAtualizacao;
 
     private Boolean ativo;
 
@@ -43,6 +52,14 @@ public class Pessoa {
         this.nome = nome;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
@@ -57,6 +74,14 @@ public class Pessoa {
 
     public void setDataInsercao(LocalDateTime dataInsercao) {
         this.dataInsercao = dataInsercao;
+    }
+
+    public LocalDateTime getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
     }
 
     public Boolean getAtivo() {
