@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 
-class PessoaInsertionDTO implements Serializable {
+public class PessoaInsertionDTO implements Serializable {
 
     private String nome;
 
