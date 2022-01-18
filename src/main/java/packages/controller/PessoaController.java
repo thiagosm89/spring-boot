@@ -9,19 +9,26 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import packages.domain.Pessoa;
 import packages.dto.PessoaInsertionDTO;
+import packages.service.PessoaService;
 
 @RestController
 @RequestMapping("/pessoa")
 public class PessoaController {
 
-@Autowired
-    ModelMapper modelMapper;
+    private final PessoaService pessoaService;
+    private  final ModelMapper modelMapper;
+
+    @Autowired
+    public PessoaController(PessoaService pessoaService, ModelMapper modelMapper) {
+        this.pessoaService = pessoaService;
+        this.modelMapper = modelMapper;
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void inserirPessoa (PessoaInsertionDTO pessoaInsertionDTO){
-        Pessoa pessoa = new Pessoa();
-        pessoa = modelMapper.map(pessoaInsertionDTO, Pessoa.class);
+    public Pessoa inserirPessoa (PessoaInsertionDTO pessoaInsertionDTO){
+        Pessoa pessoa = modelMapper.map(pessoaInsertionDTO, Pessoa.class);
+        return pessoaService.inserirPessoa(pessoa);
     }
 
 }
