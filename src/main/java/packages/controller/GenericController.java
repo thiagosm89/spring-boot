@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 abstract class GenericController {
+
     protected final ModelMapper modelMapper;
 
     protected GenericController(ModelMapper modelMapper) {
@@ -26,4 +27,5 @@ abstract class GenericController {
             .status(HttpStatus.CREATED)
             .body(out);
     }
+
 }
