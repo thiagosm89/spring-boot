@@ -1,20 +1,32 @@
 package packages.dto;
 
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
+
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Objects;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class PessoaInsertionDTO implements Serializable {
 
+    private static final long serialVersionUID = 4423020489529237653L;
+
+    @NotNull
+    @NotEmpty
     private String nome;
 
+    @NotNull
+    @NotEmpty
+    private String cpf;
+
+    @NotNull
+    @NotEmpty
+    private String confirmarCpf;
+
+    @NotNull
+    @DateTimeFormat(iso = DATE)
     private LocalDate dataNascimento;
-
-    private LocalDateTime dataInsercao;
-
-    private Boolean ativo;
 
     public String getNome() {
         return nome;
@@ -24,40 +36,27 @@ public class PessoaInsertionDTO implements Serializable {
         this.nome = nome;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getConfirmarCpf() {
+        return confirmarCpf;
+    }
+
+    public void setConfirmarCpf(String confirmarCpf) {
+        this.confirmarCpf = confirmarCpf;
+    }
+
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }
-
-    public LocalDateTime getDataInsercao() {
-        return dataInsercao;
-    }
-
-    public void setDataInsercao(LocalDateTime dataInsercao) {
-        this.dataInsercao = dataInsercao;
-    }
-
-    public Boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(Boolean ativo) {
-        this.ativo = ativo;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        PessoaInsertionDTO that = (PessoaInsertionDTO) o;
-        return Objects.equals(nome, that.nome) && Objects.equals(dataNascimento, that.dataNascimento) && Objects.equals(dataInsercao, that.dataInsercao) && Objects.equals(ativo, that.ativo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(nome, dataNascimento, dataInsercao, ativo);
     }
 }
