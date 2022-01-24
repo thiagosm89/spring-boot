@@ -18,4 +18,8 @@ public class PessoaService {
     public Pessoa inserirPessoa(Pessoa pessoa){
         return pessoaRepository.save(pessoa);
     }
+
+    public Pessoa atualizarPessoa(Pessoa pessoa) {
+        return pessoaRepository.save(pessoa);
+    }
 }
