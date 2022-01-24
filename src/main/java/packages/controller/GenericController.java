@@ -16,15 +16,18 @@ abstract class GenericController {
         return modelMapper.map(entity, clazz);
     }
 
-    protected <T> ResponseEntity<T> responseOk(T entity) {
-        return ResponseEntity.ok(entity);
-    }
-
     protected <IN, OUT> ResponseEntity<OUT> responseCreated(IN entity, Class<OUT> dtoClazz) {
         OUT out = modelMapper.map(entity, dtoClazz);
 
         return ResponseEntity
             .status(HttpStatus.CREATED)
+            .body(out);
+    }
+    protected <IN, OUT> ResponseEntity<OUT> responseOk(IN entity, Class<OUT> dtoClazz) {
+        OUT out = modelMapper.map(entity, dtoClazz);
+
+        return ResponseEntity
+            .status(HttpStatus.OK)
             .body(out);
     }
 

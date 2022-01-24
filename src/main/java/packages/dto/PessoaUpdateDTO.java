@@ -1,14 +1,24 @@
 package packages.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-class PessoaUpdateDTO implements Serializable {
+import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
+
+public class PessoaUpdateDTO implements Serializable {
 
     private static final long serialVersionUID = 3235935358278375465L;
 
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo nome.")
+    @NotEmpty(message = "Campo obrigatório não informado. Favor informar o campo nome.")
     private String nome;
 
+    @NotNull(message = "Campo obrigatório não informado. Favor informar o campo dataNascimento.")
+    @DateTimeFormat(iso = DATE)
     private LocalDate dataNascimento;
 
     private Boolean ativo;
